@@ -17,7 +17,7 @@
             --gold: #FFD700;
             --deep-bg: #020204;
             --glass: rgba(20, 20, 30, 0.6);
-            --glass-strong: rgba(10, 15, 25, 0.9);
+            --glass-strong: rgba(10, 15, 25, 0.8);
             --border: rgba(255, 255, 255, 0.1);
             --text-main: #e0e0e0;
         }
@@ -116,6 +116,44 @@
         }
         .btn-hollow:hover { background: var(--neon-cyan); color: black; box-shadow: 0 0 30px var(--neon-cyan); }
 
+        /* --- BENTO GRID ABOUT SECTION --- */
+        .about-section { padding: 100px 8%; background: linear-gradient(to bottom, #020204, #0a0a10); }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .bento-card {
+            background: var(--glass-strong);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .bento-card:hover { transform: translateY(-5px); border-color: var(--neon-cyan); }
+
+        /* Specific Card Sizes */
+        .card-profile { grid-column: span 2; display: flex; align-items: center; gap: 20px; }
+        .card-vision { grid-column: span 1; }
+        .card-mission { grid-column: span 1; }
+        .card-history { grid-column: span 2; }
+        .card-clients { grid-column: span 1; }
+        .card-why { grid-column: span 1; }
+
+        /* Bento Content */
+        .bento-img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; }
+        .bento-title { font-family: 'Orbitron'; color: white; font-size: 18px; margin-bottom: 10px; }
+        .bento-text { font-size: 14px; color: #a0aab5; line-height: 1.6; }
+        .highlight { color: var(--neon-cyan); font-weight: bold; }
+        .linkedin-btn { display: inline-block; margin-top: 10px; color: #0077b5; border: 1px solid #0077b5; padding: 5px 15px; border-radius: 4px; font-size: 12px; text-decoration: none; }
+        .linkedin-btn:hover { background: #0077b5; color: white; }
+
         /* --- SOLUTIONS --- */
         .solutions-section { padding: 100px 8%; }
         .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px; }
@@ -163,49 +201,16 @@
         .input-field { width: 100%; padding: 18px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: white; border-radius: 8px; font-family: 'Poppins'; font-size: 15px; }
         .input-field:focus { border-color: var(--neon-cyan); outline: none; box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
 
-        /* --- TABBED ABOUT SECTION --- */
-        .about-section { padding: 100px 10%; background: #050508; border-top: 1px solid #222; }
-        .about-container { display: flex; gap: 50px; }
-        
-        .about-nav { width: 25%; display: flex; flex-direction: column; gap: 10px; }
-        .tab-btn { 
-            padding: 15px 20px; background: transparent; border: none; border-left: 3px solid #333; 
-            color: #777; text-align: left; cursor: pointer; font-family: 'Orbitron'; font-size: 14px; 
-            transition: 0.3s;
-        }
-        .tab-btn:hover { color: white; background: rgba(255,255,255,0.05); }
-        .tab-btn.active { border-left: 3px solid var(--gold); color: var(--gold); background: rgba(255, 215, 0, 0.05); }
-
-        .about-content-area { width: 75%; background: var(--glass-strong); padding: 40px; border-radius: 20px; border: 1px solid #222; }
-        .tab-content { display: none; animation: fadeIn 0.5s; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .bio-header { display: flex; gap: 30px; align-items: center; margin-bottom: 30px; }
-        .bio-img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; }
-        .bio-text h3 { font-family: 'Orbitron'; font-size: 28px; color: white; margin: 0; }
-        .bio-text p { color: #aaa; margin: 5px 0 0; }
-        .linkedin-btn { 
-            display: inline-block; margin-top: 10px; color: #0077b5; font-weight: bold; text-decoration: none; 
-            border: 1px solid #0077b5; padding: 5px 15px; border-radius: 4px; font-size: 12px;
-        }
-        .linkedin-btn:hover { background: #0077b5; color: white; }
-
-        .content-body p { line-height: 1.8; color: #ccc; margin-bottom: 20px; font-size: 15px; }
-        .highlight { color: var(--neon-cyan); font-weight: 600; }
-
-        footer { text-align: center; padding: 40px; background: #000; color: #555; font-size: 12px; border-top: 1px solid #222; }
+        footer { text-align: center; padding: 60px; border-top: 1px solid #333; font-size: 13px; color: #666; }
 
         @media (max-width: 768px) {
             .hero { padding-top: 150px; text-align: center; }
             .hero h1 { font-size: 45px; }
-            .about-container { flex-direction: column; }
-            .about-nav { width: 100%; flex-direction: row; overflow-x: auto; }
-            .about-content-area { width: 100%; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .card-profile, .card-history { grid-column: span 1; }
             .modal-box { flex-direction: column; height: 95vh; }
             .modal-left, .modal-right { width: 100%; padding: 30px; }
             .nav-links { display: none; }
-            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -222,9 +227,9 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#bio">Profile Card</a>
+            <a href="#about-bento">About Me</a>
             <a href="#solutions">Solutions</a>
             <a href="#reachout" style="color:var(--neon-pink);">Reach Out</a>
-            <a href="#about-section" class="about-btn">ABOUT ME</a>
         </div>
     </nav>
 
@@ -284,6 +289,54 @@
         <button class="btn-hollow" onclick="drawCard()"><i class="fa-solid fa-download"></i> Download HD Card</button>
     </section>
 
+    <section id="about-bento" class="about-section">
+        <div class="section-title">The Mind Behind Code</div>
+        <div class="section-subtitle">Full-Stack MIS & Automation Architect</div>
+
+        <div class="bento-grid">
+            <div class="bento-card card-profile">
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQFJOqEk6aaAcA/profile-displayphoto-shrink_800_800/B56ZYPBVnIHQAc-/0/1744008731790?e=1772668800&v=beta&t=2jENntP4gi3TszmNSVYr8Y_Xm0PsdINmoYH_SBIPnMo" class="bento-img">
+                <div>
+                    <h3 class="bento-title">Who Am I?</h3>
+                    <p class="bento-text">
+                        I am <span class="highlight">Debopriya Chatterjee</span>, based in Salt Lake, Kolkata. 
+                        Bridging legacy operations and modern digital efficiency. I understand data as a business asset, not just code.
+                    </p>
+                    <a href="https://linkedin.com/in/debopriya-chatterjee-22a406215" target="_blank" class="linkedin-btn"><i class="fa-brands fa-linkedin"></i> Verified Profile</a>
+                </div>
+            </div>
+
+            <div class="bento-card card-vision">
+                <h3 class="bento-title"><i class="fa-solid fa-eye"></i> Vision</h3>
+                <p class="bento-text">To create a business ecosystem where <span class="highlight">human error is eliminated</span> from repetitive tasks. Democratizing high-end automation for all.</p>
+            </div>
+
+            <div class="bento-card card-mission">
+                <h3 class="bento-title"><i class="fa-solid fa-rocket"></i> Mission</h3>
+                <p class="bento-text">Replace manual emails with <strong>Workflows</strong>. Replace Excel with <strong>Live Dashboards</strong>. Replace chaos with <strong>Code</strong>.</p>
+            </div>
+
+            <div class="bento-card card-history">
+                <h3 class="bento-title"><i class="fa-solid fa-folder-open"></i> Project History</h3>
+                <p class="bento-text">
+                    • <strong>Logistics:</strong> Truck Bidding Portal (100+ daily trips).<br>
+                    • <strong>Finance:</strong> Automated Invoicing (5000+ PDFs/mo).<br>
+                    • <strong>Analytics:</strong> D3.js Dashboard (2M Sales Rows).
+                </p>
+            </div>
+
+            <div class="bento-card card-clients">
+                <h3 class="bento-title"><i class="fa-solid fa-handshake"></i> Client Success</h3>
+                <p class="bento-text">100% Retention Rate on AMCs. My systems are designed to be "Set and Forget".</p>
+            </div>
+
+            <div class="bento-card card-why">
+                <h3 class="bento-title"><i class="fa-solid fa-user-check"></i> Why Me?</h3>
+                <p class="bento-text">Most developers code. I understand <strong>Business Logic</strong> (Tax, HR, Supply Chain). No spoon-feeding needed.</p>
+            </div>
+        </div>
+    </section>
+
     <section id="solutions" class="solutions-section">
         <div class="section-title">Enterprise Solutions</div>
         <div class="section-subtitle">Select a Module to View Full Details</div>
@@ -325,102 +378,6 @@
                 <button type="submit" class="btn-main" style="width:100%;" id="submitBtn">SEND INQUIRY</button>
                 <p id="status" style="text-align:center; color:var(--neon-cyan); display:none; margin-top:20px;"></p>
             </form>
-        </div>
-    </section>
-
-    <section id="about-section" class="about-section">
-        <div class="section-title">About Me</div>
-        <div class="section-subtitle">The Mind Behind The Code</div>
-        
-        <div class="about-container">
-            <div class="about-nav">
-                <button class="tab-btn active" onclick="openTab(event, 'Identity')">WHO AM I?</button>
-                <button class="tab-btn" onclick="openTab(event, 'Vision')">MY VISION</button>
-                <button class="tab-btn" onclick="openTab(event, 'Mission')">MY MISSION</button>
-                <button class="tab-btn" onclick="openTab(event, 'Projects')">PROJECT HISTORY</button>
-                <button class="tab-btn" onclick="openTab(event, 'Clients')">CLIENT SATISFACTION</button>
-                <button class="tab-btn" onclick="openTab(event, 'Cost')">PROJECT COST</button>
-                <button class="tab-btn" onclick="openTab(event, 'WhyMe')">WHY CHOOSE ME?</button>
-            </div>
-
-            <div class="about-content-area">
-                
-                <div id="Identity" class="tab-content active">
-                    <div class="bio-header">
-                        <img src="https://media.licdn.com/dms/image/v2/D5603AQFJOqEk6aaAcA/profile-displayphoto-shrink_800_800/B56ZYPBVnIHQAc-/0/1744008731790?e=1772668800&v=beta&t=2jENntP4gi3TszmNSVYr8Y_Xm0PsdINmoYH_SBIPnMo" class="bio-img">
-                        <div class="bio-text">
-                            <h3>Debopriya Chatterjee</h3>
-                            <p>MIS Specialist & Automation Architect</p>
-                            <a href="https://linkedin.com/in/debopriya-chatterjee-22a406215" target="_blank" class="linkedin-btn"><i class="fa-brands fa-linkedin"></i> Connect on LinkedIn</a>
-                        </div>
-                    </div>
-                    <div class="content-body">
-                        <p>I am a <span class="highlight">Full-Stack Automation Expert</span> based in Salt Lake, Kolkata. I specialize in bridging the gap between legacy business operations and modern digital efficiency.</p>
-                        <p>With a deep background in **MIS (Management Information Systems)**, I understand data not just as code, but as a business asset. I have worked in organizations where I optimized workflows, reduced manual data entry by 90%, and built custom tools that replaced expensive software.</p>
-                    </div>
-                </div>
-
-                <div id="Vision" class="tab-content">
-                    <h3>My Vision</h3>
-                    <div class="content-body">
-                        <p>"To create a business ecosystem where <span class="highlight">human error is eliminated</span> from repetitive tasks."</p>
-                        <p>I envision a future where business owners don't spend their weekends fixing Excel sheets. I want to democratize high-end automation tools—making Enterprise-grade Truck Bidding systems and Real-time Dashboards accessible to businesses of all sizes, not just the Fortune 500.</p>
-                    </div>
-                </div>
-
-                <div id="Mission" class="tab-content">
-                    <h3>My Mission</h3>
-                    <div class="content-body">
-                        <p>My mission is simple: <span class="highlight">Speed, Security, and Scalability.</span></p>
-                        <ul>
-                            <li>To replace manual email chains with **Automated Workflows**.</li>
-                            <li>To replace stagnant Excel reports with **Live Web Visualizations**.</li>
-                            <li>To replace chaotic phone calls with **Systematic Bidding Portals**.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div id="Projects" class="tab-content">
-                    <h3>Project History</h3>
-                    <div class="content-body">
-                        <p>I have successfully deployed systems for Logistics, Retail, and Manufacturing sectors.</p>
-                        <p><strong>Key Highlights:</strong><br>
-                        • **Logistics:** A Truck Bidding Portal handling 100+ daily trips across 5 states.<br>
-                        • **Finance:** Automated Invoicing System generating 5,000+ PDF invoices monthly.<br>
-                        • **Analytics:** A D3.js Dashboard processing 2 Million rows of sales data with sub-second latency.</p>
-                    </div>
-                </div>
-
-                <div id="Clients" class="tab-content">
-                    <h3>Client Satisfaction</h3>
-                    <div class="content-body">
-                        <p>My clients value <span class="highlight">Reliability</span> above all else.</p>
-                        <p>I don't just deliver code; I deliver a warranty. When I build a system, I ensure it runs 24/7. My solutions are designed to be "Set and Forget". Once deployed, they run autonomously, requiring minimal maintenance. This has led to a 100% retention rate for my AMC (Annual Maintenance Contract) services.</p>
-                    </div>
-                </div>
-
-                <div id="Cost" class="tab-content">
-                    <h3>Average Project Cost</h3>
-                    <div class="content-body">
-                        <p>I believe in transparent, value-based pricing.</p>
-                        <ul>
-                            <li><strong>Basic Automation (Scripts/Bots):</strong> ₹5,000 - ₹15,000</li>
-                            <li><strong>Dashboards & Visualization:</strong> ₹15,000 - ₹50,000</li>
-                            <li><strong>Full Stack Web Apps (Portals):</strong> ₹30,000 - ₹1 Lakh+</li>
-                        </ul>
-                        <p><i>*Costs vary based on data volume and complexity. I always provide a detailed free quotation first.</i></p>
-                    </div>
-                </div>
-
-                <div id="WhyMe" class="tab-content">
-                    <h3>Why Choose Me?</h3>
-                    <div class="content-body">
-                        <p>Because I am not just a developer; I am an <span class="highlight">MIS Specialist</span>.</p>
-                        <p>Most developers know code but don't understand Business Logic (Accounting, Supply Chain, HR). I understand both. I know how a Purchase Order flows, how Tax is calculated, and how Logistics L1 bidding works. This ensures I build exactly what you need, without you having to explain basic business concepts.</p>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </section>
 
@@ -508,11 +465,8 @@
             const serviceName = services[currentIdx].t;
             closeModal();
             document.getElementById('reachout').scrollIntoView();
-            
-            // Logic to find and select the option in dropdown
             const select = document.getElementById('serviceSelect');
             for(let i=0; i<select.options.length; i++) {
-                // Fuzzy match (contains the service name)
                 if(select.options[i].text.includes(serviceName.split(" ")[0])) {
                     select.selectedIndex = i;
                     break;
@@ -573,23 +527,6 @@
                 })
                 .catch(err => alert("Error connecting to server."));
         });
-
-        // --- 7. TAB LOGIC (ABOUT) ---
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-                tabcontent[i].classList.remove('active');
-            }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.className += " active";
-        }
     </script>
 </body>
 </html>
