@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debopriya Chatterjee | Enterprise Automation</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-violet: #bc13fe;
+            --gold: #FFD700;
+            --deep-bg: #020204;
+            --glass: rgba(20, 20, 30, 0.6);
+            --glass-strong: rgba(10, 15, 25, 0.9);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background-color: var(--deep-bg); color: var(--text-main); font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+
+        /* --- BACKGROUND --- */
+        .rgb-wrapper {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;
+            background: #020204; overflow: hidden;
+        }
+        .orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.3; animation: floatOrb 10s infinite alternate; }
+        .orb-1 { width: 500px; height: 500px; background: var(--neon-cyan); top: -100px; left: -100px; }
+        .orb-2 { width: 400px; height: 400px; background: var(--neon-pink); bottom: -100px; right: -100px; animation-delay: -5s; }
+        @keyframes floatOrb { from { transform: translate(0,0); } to { transform: translate(30px, 50px); } }
+        .grid-lines {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* --- NAV --- */
+        nav {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(2, 2, 4, 0.9); backdrop-filter: blur(20px);
+            padding: 20px 50px; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-family: 'Orbitron'; font-size: 24px; letter-spacing: 2px; color: white; text-transform: uppercase; }
+        .logo span { color: var(--neon-cyan); }
+        
+        .nav-links a { 
+            margin-left: 35px; text-decoration: none; color: #aaa; font-size: 12px; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; 
+        }
+        .nav-links a:hover { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+        .about-btn { color: var(--gold) !important; border: 1px solid var(--gold); padding: 8px 20px; border-radius: 4px; }
+        .about-btn:hover { background: var(--gold); color: black !important; }
+
+        /* --- HERO --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 0 10%; position: relative; }
+        .hero-content { max-width: 1100px; z-index: 2; }
+        .hero-tag { 
+            display: inline-block; padding: 10px 25px; border: 1px solid var(--neon-violet); color: var(--neon-violet); 
+            font-size: 14px; letter-spacing: 4px; margin-bottom: 30px; background: rgba(188, 19, 254, 0.1); font-weight: 800;
+        }
+        .hero h1 { font-family: 'Orbitron'; font-size: 80px; line-height: 1.1; margin-bottom: 30px; text-transform: uppercase; }
+        .hero h1 span { color: transparent; -webkit-text-stroke: 1px var(--neon-cyan); }
+        .hero p { 
+            font-size: 22px; color: #cbd5e1; margin-bottom: 50px; border-left: 5px solid var(--neon-cyan); 
+            padding-left: 30px; line-height: 1.8; max-width: 900px; font-weight: 300;
+        }
+        .hero p strong { color: white; font-weight: 600; text-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        
+        .btn-main {
+            padding: 20px 50px; background: var(--neon-cyan); color: #000; border: none; font-weight: 800; text-transform: uppercase; 
+            cursor: pointer; clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); transition: 0.3s; letter-spacing: 1px; font-size: 16px;
+        }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 50px var(--neon-cyan); }
+
+        /* --- CARD --- */
+        .card-section { padding: 120px 0; display: flex; flex-direction: column; align-items: center; }
+        .section-title { font-family: 'Orbitron'; font-size: 50px; margin-bottom: 10px; text-align: center; color: white; text-transform: uppercase; text-shadow: 0 0 30px rgba(0, 243, 255, 0.2); }
+        .section-subtitle { color: #888; margin-bottom: 80px; text-align: center; font-size: 16px; letter-spacing: 4px; text-transform: uppercase; }
+
+        .scene { width: 550px; height: 320px; perspective: 1200px; margin-bottom: 50px; }
+        .card-3d { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s; cursor: pointer; }
+        .card-3d.flipped { transform: rotateY(180deg); }
+
+        .card-face {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.15); border: 1px solid rgba(255,255,255,0.2); overflow: hidden;
+            background: rgba(10, 10, 15, 0.9); backdrop-filter: blur(20px);
+        }
+
+        .front { display: flex; align-items: center; padding: 35px; border-bottom: 4px solid var(--neon-cyan); }
+        .front-img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--neon-cyan); object-fit: cover; margin-right: 35px; }
+        .front h2 { font-family: 'Rajdhani'; font-size: 38px; margin: 0; line-height: 1; text-transform: uppercase; color: white; }
+        .front p { color: var(--neon-cyan); letter-spacing: 3px; font-size: 12px; margin-top: 8px; font-weight: 700; text-transform: uppercase; }
+        .badges { display: flex; gap: 10px; margin-top: 25px; }
+        .badge { padding: 5px 12px; font-size: 10px; border-radius: 4px; color: var(--neon-cyan); border: 1px solid var(--neon-cyan); background: rgba(0, 243, 255, 0.1); }
+
+        .back { transform: rotateY(180deg); padding: 30px; display: flex; flex-direction: column; border-bottom: 4px solid var(--neon-pink); }
+        .back-head { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+        .back-head h3 { font-family: 'Rajdhani'; color: #fff; text-transform: uppercase; font-weight: 800; font-size: 20px; }
+        .mini-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .mini-item { font-size: 11px; font-weight: 600; color: #ccc; display: flex; align-items: center; gap: 8px; }
+        .mini-item i { color: var(--neon-pink); font-size: 10px; }
+        .back-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+
+        .btn-hollow {
+            background: transparent; border: 1px solid var(--neon-cyan); color: var(--neon-cyan); padding: 12px 35px; 
+            font-size: 14px; cursor: pointer; transition: 0.3s; letter-spacing: 2px; text-transform: uppercase; font-weight: 700;
+        }
+        .btn-hollow:hover { background: var(--neon-cyan); color: black; box-shadow: 0 0 30px var(--neon-cyan); }
+
+        /* --- SOLUTIONS --- */
+        .solutions-section { padding: 100px 8%; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px; }
+        
+        .service-card {
+            background: var(--glass); border: 1px solid var(--border); padding: 40px; border-radius: 15px;
+            transition: 0.4s; cursor: pointer; position: relative; overflow: hidden; backdrop-filter: blur(10px);
+        }
+        .service-card:hover { transform: translateY(-10px); border-color: var(--neon-cyan); box-shadow: 0 0 40px rgba(0, 243, 255, 0.15); }
+        .s-icon { font-size: 45px; color: var(--neon-cyan); margin-bottom: 20px; }
+        .service-card h3 { font-family: 'Rajdhani'; font-size: 26px; margin-bottom: 10px; color: white; }
+        .service-card p { font-size: 14px; color: #a0aab5; line-height: 1.6; }
+        .click-hint { margin-top: 25px; font-size: 12px; color: var(--neon-violet); font-weight: 700; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
+        .modal-box { width: 95%; max-width: 1100px; height: 85vh; background: #050505; border: 1px solid var(--neon-cyan); border-radius: 20px; display: flex; overflow: hidden; box-shadow: 0 0 80px rgba(0, 243, 255, 0.2); animation: fadeUp 0.3s ease-out; position: relative; }
+        @keyframes fadeUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .modal-nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%); 
+            background: rgba(0,0,0,0.5); border: 1px solid var(--border); color: white;
+            width: 50px; height: 50px; border-radius: 50%; cursor: pointer; z-index: 10;
+            display: flex; align-items: center; justify-content: center; font-size: 20px; transition: 0.3s;
+        }
+        .modal-nav-btn:hover { background: var(--neon-cyan); color: black; box-shadow: 0 0 20px var(--neon-cyan); }
+        .prev-modal { left: 20px; }
+        .next-modal { right: 20px; }
+
+        .modal-left { width: 35%; background: linear-gradient(135deg, #020202, #0f0f0f); padding: 60px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #333; }
+        .modal-right { width: 65%; padding: 60px; overflow-y: auto; }
+
+        .modal-title { font-family: 'Orbitron'; font-size: 36px; line-height: 1.1; color: white; margin-bottom: 10px; }
+        .modal-price { font-size: 22px; color: var(--neon-pink); font-weight: 700; margin-bottom: 40px; display: flex; align-items: center; gap: 10px; }
+        .detail-header { font-size: 13px; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; }
+        .detail-content { font-size: 15px; color: #cbd5e1; line-height: 1.8; margin-bottom: 40px; }
+        .tag { background: rgba(255,255,255,0.05); padding: 8px 15px; border-radius: 5px; font-size: 12px; color: #ccc; border: 1px solid #333; display: inline-block; margin-right: 10px; margin-bottom: 10px;}
+        .close-modal { position: absolute; top: 25px; right: 25px; color: white; font-size: 30px; cursor: pointer; z-index: 20; }
+
+        /* --- CONTACT --- */
+        .contact-section { padding: 100px 10%; }
+        .form-container { max-width: 900px; margin: 0 auto; background: var(--glass); padding: 60px; border-radius: 20px; border: 1px solid var(--border); backdrop-filter: blur(15px); }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+        .input-group label { display: block; color: var(--neon-cyan); font-size: 13px; margin-bottom: 10px; font-weight: 700; letter-spacing: 1px; }
+        .input-field { width: 100%; padding: 18px; background: rgba(0,0,0,0.5); border: 1px solid #333; color: white; border-radius: 8px; font-family: 'Poppins'; font-size: 15px; }
+        .input-field:focus { border-color: var(--neon-cyan); outline: none; box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
+
+        /* --- TABBED ABOUT SECTION --- */
+        .about-section { padding: 100px 10%; background: #050508; border-top: 1px solid #222; }
+        .about-container { display: flex; gap: 50px; }
+        
+        .about-nav { width: 25%; display: flex; flex-direction: column; gap: 10px; }
+        .tab-btn { 
+            padding: 15px 20px; background: transparent; border: none; border-left: 3px solid #333; 
+            color: #777; text-align: left; cursor: pointer; font-family: 'Orbitron'; font-size: 14px; 
+            transition: 0.3s;
+        }
+        .tab-btn:hover { color: white; background: rgba(255,255,255,0.05); }
+        .tab-btn.active { border-left: 3px solid var(--gold); color: var(--gold); background: rgba(255, 215, 0, 0.05); }
+
+        .about-content-area { width: 75%; background: var(--glass-strong); padding: 40px; border-radius: 20px; border: 1px solid #222; }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .bio-header { display: flex; gap: 30px; align-items: center; margin-bottom: 30px; }
+        .bio-img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; }
+        .bio-text h3 { font-family: 'Orbitron'; font-size: 28px; color: white; margin: 0; }
+        .bio-text p { color: #aaa; margin: 5px 0 0; }
+        .linkedin-btn { 
+            display: inline-block; margin-top: 10px; color: #0077b5; font-weight: bold; text-decoration: none; 
+            border: 1px solid #0077b5; padding: 5px 15px; border-radius: 4px; font-size: 12px;
+        }
+        .linkedin-btn:hover { background: #0077b5; color: white; }
+
+        .content-body p { line-height: 1.8; color: #ccc; margin-bottom: 20px; font-size: 15px; }
+        .highlight { color: var(--neon-cyan); font-weight: 600; }
+
+        footer { text-align: center; padding: 40px; background: #000; color: #555; font-size: 12px; border-top: 1px solid #222; }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 150px; text-align: center; }
+            .hero h1 { font-size: 45px; }
+            .about-container { flex-direction: column; }
+            .about-nav { width: 100%; flex-direction: row; overflow-x: auto; }
+            .about-content-area { width: 100%; }
+            .modal-box { flex-direction: column; height: 95vh; }
+            .modal-left, .modal-right { width: 100%; padding: 30px; }
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="rgb-wrapper">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="grid-lines"></div>
+    </div>
+
+    <nav>
+        <div class="logo">DEBOPRIYA<span>.TECH</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#bio">Profile Card</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#reachout" style="color:var(--neon-pink);">Reach Out</a>
+            <a href="#about-section" class="about-btn">ABOUT ME</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">ENTERPRISE AUTOMATION ARCHITECT</span>
+            <h1>Turning Data<br><span>Into Decisions</span></h1>
+            <p>
+                I architect <strong>Self-Running Enterprise Ecosystems</strong>. My code transforms manual chaos into <strong>Scalable, Secure, and Seamless Automation</strong>. 
+                From complex <strong>Truck Bidding Portals</strong> handling millions in logistics to <strong>Real-Time Automated Analytics</strong> that drive profitability.
+                <br><br>
+                <strong>"I don't just build software; I build Business Efficiency."</strong>
+            </p>
+            <button class="btn-main" onclick="document.getElementById('solutions').scrollIntoView()">Explore Ecosystem</button>
+        </div>
+    </section>
+
+    <section id="bio" class="card-section">
+        <div class="section-title">Digital Identity</div>
+        <div class="section-subtitle">Tap to Flip &bull; Download HD Card</div>
+
+        <div class="scene">
+            <div class="card-3d" onclick="this.classList.toggle('flipped')">
+                <div class="card-face front">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQFJOqEk6aaAcA/profile-displayphoto-shrink_800_800/B56ZYPBVnIHQAc-/0/1744008731790?e=1772668800&v=beta&t=2jENntP4gi3TszmNSVYr8Y_Xm0PsdINmoYH_SBIPnMo" class="front-img">
+                    <div class="front-info">
+                        <h2>Debopriya<br>Chatterjee</h2>
+                        <p>Automation Architect</p>
+                        <div class="badges">
+                            <span class="badge">SQL/DBA</span>
+                            <span class="badge">WEB VIZ</span>
+                            <span class="badge">BOTS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-face back">
+                    <div class="back-head"><h3>Core Capabilities</h3></div>
+                    <div class="mini-list">
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> Logistics Bidding</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> Web Visuals</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> WhatsApp API</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> Purchase Auto</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> Custom Web Apps</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> SQL Optimization</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> Auto-Invoicing</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> Apps Script</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> Inventory Mgmt</div>
+                        <div class="mini-item"><i class="fa-solid fa-check"></i> Data Migration</div>
+                    </div>
+                    <div class="back-foot">
+                        <div style="font-size:11px; font-weight:700; color:#fff;">+91 7029948387<br>protulchatterjee2020@gmail.com</div>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://linkedin.com/in/debopriya-chatterjee-22a406215" style="width:50px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn-hollow" onclick="drawCard()"><i class="fa-solid fa-download"></i> Download HD Card</button>
+    </section>
+
+    <section id="solutions" class="solutions-section">
+        <div class="section-title">Enterprise Solutions</div>
+        <div class="section-subtitle">Select a Module to View Full Details</div>
+        <div class="grid-container" id="servicesGrid"></div>
+    </section>
+
+    <section id="reachout" class="contact-section">
+        <div class="section-title">Reach Out</div>
+        <div class="section-subtitle">Secure Project Inquiry Channel</div>
+        <div class="form-container">
+            <form id="hireForm">
+                <div class="input-row">
+                    <div class="input-group"><label>FULL NAME</label><input type="text" name="name" class="input-field" required></div>
+                    <div class="input-group"><label>EMAIL ADDRESS</label><input type="email" name="email" class="input-field" required></div>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>SERVICE REQUIRED</label>
+                        <select class="input-field" name="service" id="serviceSelect" onchange="document.getElementById('otherInput').style.display=(this.value==='Other')?'block':'none'">
+                            <option>Logistics Bidding System</option>
+                            <option>Web Visualization</option>
+                            <option>WhatsApp Automation</option>
+                            <option>Purchase Automation</option>
+                            <option>Custom Web Application</option>
+                            <option>SQL Optimization</option>
+                            <option>Auto-Invoicing</option>
+                            <option>Google Automation</option>
+                            <option>Inventory Mgmt</option>
+                            <option>Data Migration</option>
+                            <option>Reporting Bots</option>
+                            <option>Legacy Upgrade</option>
+                            <option value="Other">Other Requirement</option>
+                        </select>
+                    </div>
+                    <div class="input-group"><label>DATA VOLUME (APPROX)</label><input type="text" name="dataVolume" class="input-field" placeholder="e.g. 50k Rows" required></div>
+                </div>
+                <div class="input-group" id="otherInput" style="display:none; margin-bottom:30px;"><label>PLEASE SPECIFY DETAILS</label><input type="text" name="otherDetails" class="input-field"></div>
+                <div class="input-group" style="margin-bottom:40px;"><label>PROJECT BRIEF</label><textarea name="message" class="input-field" rows="5"></textarea></div>
+                <button type="submit" class="btn-main" style="width:100%;" id="submitBtn">SEND INQUIRY</button>
+                <p id="status" style="text-align:center; color:var(--neon-cyan); display:none; margin-top:20px;"></p>
+            </form>
+        </div>
+    </section>
+
+    <section id="about-section" class="about-section">
+        <div class="section-title">About Me</div>
+        <div class="section-subtitle">The Mind Behind The Code</div>
+        
+        <div class="about-container">
+            <div class="about-nav">
+                <button class="tab-btn active" onclick="openTab(event, 'Identity')">WHO AM I?</button>
+                <button class="tab-btn" onclick="openTab(event, 'Vision')">MY VISION</button>
+                <button class="tab-btn" onclick="openTab(event, 'Mission')">MY MISSION</button>
+                <button class="tab-btn" onclick="openTab(event, 'Projects')">PROJECT HISTORY</button>
+                <button class="tab-btn" onclick="openTab(event, 'Clients')">CLIENT SATISFACTION</button>
+                <button class="tab-btn" onclick="openTab(event, 'Cost')">PROJECT COST</button>
+                <button class="tab-btn" onclick="openTab(event, 'WhyMe')">WHY CHOOSE ME?</button>
+            </div>
+
+            <div class="about-content-area">
+                
+                <div id="Identity" class="tab-content active">
+                    <div class="bio-header">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQFJOqEk6aaAcA/profile-displayphoto-shrink_800_800/B56ZYPBVnIHQAc-/0/1744008731790?e=1772668800&v=beta&t=2jENntP4gi3TszmNSVYr8Y_Xm0PsdINmoYH_SBIPnMo" class="bio-img">
+                        <div class="bio-text">
+                            <h3>Debopriya Chatterjee</h3>
+                            <p>MIS Specialist & Automation Architect</p>
+                            <a href="https://linkedin.com/in/debopriya-chatterjee-22a406215" target="_blank" class="linkedin-btn"><i class="fa-brands fa-linkedin"></i> Connect on LinkedIn</a>
+                        </div>
+                    </div>
+                    <div class="content-body">
+                        <p>I am a <span class="highlight">Full-Stack Automation Expert</span> based in Salt Lake, Kolkata. I specialize in bridging the gap between legacy business operations and modern digital efficiency.</p>
+                        <p>With a deep background in **MIS (Management Information Systems)**, I understand data not just as code, but as a business asset. I have worked in organizations where I optimized workflows, reduced manual data entry by 90%, and built custom tools that replaced expensive software.</p>
+                    </div>
+                </div>
+
+                <div id="Vision" class="tab-content">
+                    <h3>My Vision</h3>
+                    <div class="content-body">
+                        <p>"To create a business ecosystem where <span class="highlight">human error is eliminated</span> from repetitive tasks."</p>
+                        <p>I envision a future where business owners don't spend their weekends fixing Excel sheets. I want to democratize high-end automation tools—making Enterprise-grade Truck Bidding systems and Real-time Dashboards accessible to businesses of all sizes, not just the Fortune 500.</p>
+                    </div>
+                </div>
+
+                <div id="Mission" class="tab-content">
+                    <h3>My Mission</h3>
+                    <div class="content-body">
+                        <p>My mission is simple: <span class="highlight">Speed, Security, and Scalability.</span></p>
+                        <ul>
+                            <li>To replace manual email chains with **Automated Workflows**.</li>
+                            <li>To replace stagnant Excel reports with **Live Web Visualizations**.</li>
+                            <li>To replace chaotic phone calls with **Systematic Bidding Portals**.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="Projects" class="tab-content">
+                    <h3>Project History</h3>
+                    <div class="content-body">
+                        <p>I have successfully deployed systems for Logistics, Retail, and Manufacturing sectors.</p>
+                        <p><strong>Key Highlights:</strong><br>
+                        • **Logistics:** A Truck Bidding Portal handling 100+ daily trips across 5 states.<br>
+                        • **Finance:** Automated Invoicing System generating 5,000+ PDF invoices monthly.<br>
+                        • **Analytics:** A D3.js Dashboard processing 2 Million rows of sales data with sub-second latency.</p>
+                    </div>
+                </div>
+
+                <div id="Clients" class="tab-content">
+                    <h3>Client Satisfaction</h3>
+                    <div class="content-body">
+                        <p>My clients value <span class="highlight">Reliability</span> above all else.</p>
+                        <p>I don't just deliver code; I deliver a warranty. When I build a system, I ensure it runs 24/7. My solutions are designed to be "Set and Forget". Once deployed, they run autonomously, requiring minimal maintenance. This has led to a 100% retention rate for my AMC (Annual Maintenance Contract) services.</p>
+                    </div>
+                </div>
+
+                <div id="Cost" class="tab-content">
+                    <h3>Average Project Cost</h3>
+                    <div class="content-body">
+                        <p>I believe in transparent, value-based pricing.</p>
+                        <ul>
+                            <li><strong>Basic Automation (Scripts/Bots):</strong> ₹5,000 - ₹15,000</li>
+                            <li><strong>Dashboards & Visualization:</strong> ₹15,000 - ₹50,000</li>
+                            <li><strong>Full Stack Web Apps (Portals):</strong> ₹30,000 - ₹1 Lakh+</li>
+                        </ul>
+                        <p><i>*Costs vary based on data volume and complexity. I always provide a detailed free quotation first.</i></p>
+                    </div>
+                </div>
+
+                <div id="WhyMe" class="tab-content">
+                    <h3>Why Choose Me?</h3>
+                    <div class="content-body">
+                        <p>Because I am not just a developer; I am an <span class="highlight">MIS Specialist</span>.</p>
+                        <p>Most developers know code but don't understand Business Logic (Accounting, Supply Chain, HR). I understand both. I know how a Purchase Order flows, how Tax is calculated, and how Logistics L1 bidding works. This ensures I build exactly what you need, without you having to explain basic business concepts.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div id="serviceModal" class="modal">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-nav-btn prev-modal" onclick="changeService(-1)"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="modal-nav-btn next-modal" onclick="changeService(1)"><i class="fa-solid fa-chevron-right"></i></div>
+
+            <div class="modal-left">
+                <h2 class="modal-title" id="m-title">Service Name</h2>
+                <div class="modal-price" id="m-price">Price</div>
+                <button class="btn-main" onclick="selectServiceAndScroll()">Request This Service</button>
+            </div>
+            <div class="modal-right">
+                <div class="detail-header">WHAT I HAVE DONE</div>
+                <div class="detail-content" id="m-done">...</div>
+                <div class="detail-header">WHAT I CAN DO FOR YOU</div>
+                <div class="detail-content" id="m-todo">...</div>
+                <div class="detail-header">FUTURE SCALABILITY</div>
+                <div class="detail-content" id="m-future">...</div>
+                <div class="detail-header">TECH STACK</div>
+                <div id="m-tech"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>&copy; 2024 Debopriya Chatterjee. Enterprise Automation Suite.</footer>
+
+    <script>
+        // --- 1. DATA ---
+        const services = [
+            { t: "Logistics Bidding", p: "Custom Quote", i: "fa-truck-fast", d: "Handling 100+ daily trips. Automated L1 selection & PO Generation.", w: "Build a secure bidding portal. Real-time rank updates for vendors.", f: "Mobile Apps, GPS Tracking.", tags: ["Node.js", "SQL", "Socket.io"] },
+            { t: "Web Visualization", p: "₹15k - ₹50k", i: "fa-chart-pie", d: "D3.js dashboard for 2 Million rows. Sub-second rendering.", w: "Interactive dashboards hosted on your server. No monthly fees.", f: "IoT Sensor Integration.", tags: ["D3.js", "React", "Big Data"] },
+            { t: "WhatsApp Automation", p: "₹10k + API", i: "fa-whatsapp", d: "Automated field data collection via chat.", w: "Chatbots for Support, Invoicing, and Order Tracking.", f: "E-commerce inside WhatsApp.", tags: ["Cloud API", "Node.js"] },
+            { t: "Purchase Automation", p: "Custom Quote", i: "fa-file-invoice", d: "Reduced RFQ approval time from 3 days to 3 hours.", w: "Upload quotes -> AI Comparison -> Email Approval -> PO.", f: "ERP Integration.", tags: ["Apps Script", "Python"] },
+            { t: "Custom Web Apps", p: "Start ₹25k", i: "fa-code", d: "Secure Client Portal for document sharing.", w: "Inventory Systems, CRM, or SaaS MVPs.", f: "Multi-tenant SaaS.", tags: ["MERN Stack", "Security"] },
+            { t: "SQL Optimization", p: "Hourly Basis", i: "fa-database", d: "Reduced query time from 20 mins to 5 seconds.", w: "Fix slow queries, normalize schema, ensure integrity.", f: "Data Warehousing.", tags: ["Oracle", "PostgreSQL"] },
+            { t: "Auto-Invoicing", p: "₹10k - ₹30k", i: "fa-receipt", d: "Generating 5000+ invoices monthly from DB.", w: "Automate billing based on order status triggers.", f: "GST Integration.", tags: ["Node.js", "PDFKit"] },
+            { t: "Google Automation", p: "₹5k - ₹20k", i: "fa-google", d: "Forms to Calendar auto-scheduling.", w: "Connect Sheets, Gmail, Drive into workflows.", f: "Custom Add-ons.", tags: ["Apps Script", "API"] },
+            { t: "Inventory Mgmt", p: "Custom Quote", i: "fa-boxes-stacked", d: "QR Code check-in/out system.", w: "Real-time stock tracking with scanners.", f: "RFID Integration.", tags: ["React Native", "SQL"] },
+            { t: "Data Migration", p: "Volume Based", i: "fa-shuffle", d: "Migrated 50k records Legacy to Salesforce.", w: "Clean, validate, and move data securely.", f: "Bi-directional Sync.", tags: ["ETL", "Python"] },
+            { t: "Reporting Bots", p: "₹8k/Bot", i: "fa-robot", d: "Slack bot posting hourly sales.", w: "Bots for Slack/Teams/Email reporting.", f: "Interactive AI Chat.", tags: ["Slack API", "Teams"] },
+            { t: "Legacy Upgrade", p: "High-End", i: "fa-server", d: "Converted VB6 app to Web App.", w: "Re-engineer old desktop software to Cloud.", f: "Microservices.", tags: ["Cloud", "Modern Web"] }
+        ];
+
+        // --- 2. GRID RENDER ---
+        const grid = document.getElementById('servicesGrid');
+        services.forEach((s, index) => {
+            grid.innerHTML += `
+                <div class="service-card" onclick="openModal(${index})">
+                    <i class="fa-solid ${s.i} s-icon"></i>
+                    <h3>${s.t}</h3>
+                    <p>${s.d}</p>
+                    <div class="click-hint">View Details <i class="fa-solid fa-arrow-right"></i></div>
+                </div>`;
+        });
+
+        // --- 3. MODAL LOGIC ---
+        let currentIdx = 0;
+        function openModal(idx) {
+            currentIdx = idx;
+            updateModal();
+            document.getElementById('serviceModal').style.display = 'flex';
+        }
+        function changeService(dir) {
+            currentIdx += dir;
+            if (currentIdx < 0) currentIdx = services.length - 1;
+            if (currentIdx >= services.length) currentIdx = 0;
+            updateModal();
+        }
+        function updateModal() {
+            const s = services[currentIdx];
+            document.getElementById('m-title').innerText = s.t;
+            document.getElementById('m-price').innerText = s.p;
+            document.getElementById('m-done').innerText = s.d;
+            document.getElementById('m-todo').innerText = s.w;
+            document.getElementById('m-future').innerText = s.f;
+            document.getElementById('m-tech').innerHTML = s.tags.map(t => `<span class="tag">${t}</span>`).join('');
+        }
+        function closeModal() { document.getElementById('serviceModal').style.display = 'none'; }
+
+        // --- 4. AUTO SELECT SERVICE & SCROLL ---
+        function selectServiceAndScroll() {
+            const serviceName = services[currentIdx].t;
+            closeModal();
+            document.getElementById('reachout').scrollIntoView();
+            
+            // Logic to find and select the option in dropdown
+            const select = document.getElementById('serviceSelect');
+            for(let i=0; i<select.options.length; i++) {
+                // Fuzzy match (contains the service name)
+                if(select.options[i].text.includes(serviceName.split(" ")[0])) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        // --- 5. CANVAS DRAWING (HD CARD) ---
+        function drawCard() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1000; canvas.height = 600;
+            const ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = '#020204'; ctx.fillRect(0,0,1000,600); // BG
+            ctx.fillStyle = '#00f3ff'; ctx.fillRect(0,0,1000,10); // Top Border
+            ctx.fillStyle = '#bc13fe'; ctx.fillRect(0,590,1000,10); // Bottom Border
+
+            ctx.fillStyle = '#FFF'; ctx.font = 'bold 50px sans-serif'; ctx.fillText('DEBOPRIYA CHATTERJEE', 50, 100);
+            ctx.fillStyle = '#00f3ff'; ctx.font = 'bold 24px sans-serif'; ctx.fillText('ENTERPRISE AUTOMATION ARCHITECT', 50, 140);
+            ctx.fillStyle = '#AAA'; ctx.font = 'italic 18px sans-serif'; ctx.fillText('"Turning Data Into Decisions"', 50, 180);
+
+            ctx.font = '20px sans-serif'; ctx.fillStyle = '#FFF';
+            let y = 250;
+            ctx.fillText('• Logistics Bidding', 50, y); ctx.fillText('• Web Visualization', 500, y);
+            ctx.fillText('• WhatsApp Automation', 50, y+40); ctx.fillText('• Purchase Workflows', 500, y+40);
+            ctx.fillText('• Custom Web Apps', 50, y+80); ctx.fillText('• Auto-Invoicing', 500, y+80);
+            ctx.fillText('• SQL Database Mgmt', 50, y+120); ctx.fillText('• Legacy Migration', 500, y+120);
+
+            ctx.fillStyle = '#111'; ctx.fillRect(50, 450, 900, 100);
+            ctx.strokeStyle = '#bc13fe'; ctx.lineWidth = 2; ctx.strokeRect(50, 450, 900, 100);
+            ctx.fillStyle = '#FFF'; ctx.font = 'bold 24px sans-serif';
+            ctx.fillText('+91 7029948387  |  protulchatterjee2020@gmail.com', 80, 510);
+            
+            const link = document.createElement('a');
+            link.download = 'Debopriya_Card.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // --- 6. FORM LOGIC ---
+        const form = document.getElementById('hireForm');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const status = document.getElementById('status');
+            btn.innerHTML = "SENDING...";
+            
+            // GOOGLE SCRIPT URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzSOq6RRoIyRwHXBRcqO6KUhbQSFfXGWVfAWwt7jVF9Po_A5916fnXCjLhZIPLz_Uci/exec';
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    btn.innerHTML = "SENT!";
+                    status.style.display = "block";
+                    status.innerText = "Received. I will revert shortly.";
+                    form.reset();
+                    setTimeout(() => { btn.innerHTML = "SEND INQUIRY"; status.style.display="none"; }, 5000);
+                })
+                .catch(err => alert("Error connecting to server."));
+        });
+
+        // --- 7. TAB LOGIC (ABOUT) ---
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove('active');
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
